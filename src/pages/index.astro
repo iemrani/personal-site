@@ -1,9 +1,67 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectMention from '../components/ProjectMention.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const published = projects.filter((project) => project.data.url !== undefined);
+const unpublished = projects.filter((project) => project.data.url === undefined);
 ---
 
 <Layout
   title="«FILL: full name» — AI and LLM engineer"
   description="Projects and contact details for «FILL: full name», an AI and LLM engineer based in Italy."
 >
+  <section>
+    <h2>Selected work</h2>
+    <div class="cards">
+      {
+        published.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            summary={project.data.summary}
+            tech={project.data.tech}
+            url={project.data.url!}
+            repo={project.data.repo}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  {
+    unpublished.length > 0 && (
+      <section>
+        <h2>Also built</h2>
+        <ul class="mentions">
+          {unpublished.map((project) => (
+            <ProjectMention title={project.data.title} summary={project.data.summary} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </Layout>
+
+<style>
+  h2 {
+    font-size: var(--step-2);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-3);
+  }
+
+  .cards {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .mentions {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>

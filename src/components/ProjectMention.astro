@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+}
+
+const { title, summary } = Astro.props;
+---
+
+<li>
+  <span class="title">{title}</span>
+  <span class="summary">{summary}</span>
+</li>
+
+<style>
+  li {
+    padding-top: var(--space-2);
+  }
+
+  li + li {
+    margin-top: var(--space-2);
+    border-top: 1px solid var(--border);
+  }
+
+  .title {
+    font-weight: 600;
+    /* Astro collapses the whitespace between the two adjacent spans, so the
+       gap has to come from CSS or the title runs into the summary. */
+    margin-right: 0.4em;
+  }
+
+  .summary {
+    color: var(--text-muted);
+  }
+</style>

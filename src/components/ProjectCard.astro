@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  tech?: string;
+  url: string;
+  repo?: string;
+}
+
+const { title, summary, tech, url, repo } = Astro.props;
+---
+
+<article>
+  <h3><a href={url}>{title}</a></h3>
+  <p class="summary">{summary}</p>
+  {tech && <p class="tech">{tech}</p>}
+  <p class="links">
+    <a href={url}>Overview and live app</a>
+    {repo && <> · <a href={repo}>Source</a></>}
+  </p>
+</article>
+
+<style>
+  article {
+    padding: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  h3 {
+    font-size: var(--step-1);
+  }
+
+  .summary {
+    margin-top: var(--space-2);
+  }
+
+  .tech {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--text-muted);
+  }
+
+  .links {
+    margin-top: var(--space-2);
+    font-size: var(--step--1);
+  }
+</style>
