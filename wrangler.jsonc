@@ -1,0 +1,9 @@
+{
+  // Static-assets-only Worker: no server code, no `main` entrypoint.
+  // Cloudflare serves everything in ./dist directly from its edge network.
+  "name": "personal-site",
+  "compatibility_date": "2026-08-08",
+  "assets": {
+    "directory": "./dist"
+  }
+}
