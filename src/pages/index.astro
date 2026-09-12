@@ -14,6 +14,7 @@ const unpublished = projects.filter((project) => project.data.url === undefined)
 // The card row must not leave empty columns when there are fewer than three
 // published projects; cap the track count at the number actually rendered.
 const columns = Math.min(published.length, 3);
+const mentionColumns = Math.min(unpublished.length, 3);
 
 // The stack row is derived from the projects' own `tech` fields, so it stays
 // true as projects are added and never claims anything a project does not.
@@ -51,7 +52,7 @@ const stack = [
     unpublished.length > 0 && (
       <section id="also-built">
         <p class="label">Also built</p>
-        <ul class="mentions">
+        <ul class="cards mentions" style={`grid-template-columns: repeat(${mentionColumns}, 1fr)`}>
           {unpublished.map((project) => (
             <ProjectMention title={project.data.title} summary={project.data.summary} />
           ))}
@@ -82,11 +83,13 @@ const stack = [
     border: 1px solid var(--rule);
   }
 
-  .cards > :global(article) {
+  .cards > :global(article),
+  .cards > :global(li) {
     border-right: 1px solid var(--rule);
   }
 
-  .cards > :global(article:last-child) {
+  .cards > :global(article:last-child),
+  .cards > :global(li:last-child) {
     border-right: 0;
   }
 
@@ -94,9 +97,6 @@ const stack = [
     margin: 0;
     padding: 0;
     list-style: none;
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    padding-inline: var(--space-4);
   }
 
   /* tag component: white fill, 1px ink border, zero radius */
@@ -121,11 +121,13 @@ const stack = [
       grid-template-columns: repeat(2, 1fr) !important;
     }
 
-    .cards > :global(article:nth-child(2n)) {
+    .cards > :global(article:nth-child(2n)),
+    .cards > :global(li:nth-child(2n)) {
       border-right: 0;
     }
 
-    .cards > :global(article:nth-child(n + 3)) {
+    .cards > :global(article:nth-child(n + 3)),
+    .cards > :global(li:nth-child(n + 3)) {
       border-top: 1px solid var(--rule);
     }
   }
@@ -135,11 +137,13 @@ const stack = [
       grid-template-columns: 1fr !important;
     }
 
-    .cards > :global(article) {
+    .cards > :global(article),
+    .cards > :global(li) {
       border-right: 0;
     }
 
-    .cards > :global(article + article) {
+    .cards > :global(article + article),
+    .cards > :global(li + li) {
       border-top: 1px solid var(--rule);
     }
   }

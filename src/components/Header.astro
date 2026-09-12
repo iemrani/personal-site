@@ -4,6 +4,7 @@ const githubUrl = 'https://github.com/iemrani';
 ---
 
 <header>
+  <div class="copy">
   <p class="eyebrow">Iman Emrani &middot; AI and LLM engineer</p>
   <h1>I build LLM applications that run in production.</h1>
   <p class="lead">
@@ -20,12 +21,23 @@ const githubUrl = 'https://github.com/iemrani';
     <i aria-hidden="true"></i>Authorised to work in Italy. Available worldwide as
     a remote contractor.
   </p>
+  </div>
+  <div class="reserved" aria-hidden="true"></div>
 </header>
 
 <style>
+  /* Two-column hero, per the brief. The right column is deliberately empty
+     until there is something true to put in it. */
   header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
     padding: 70px 0 60px;
     border-bottom: 1px dashed var(--rule);
+  }
+
+  .copy {
+    min-width: 0;
   }
 
   .eyebrow {
@@ -102,8 +114,21 @@ const githubUrl = 'https://github.com/iemrani';
     background: var(--ink);
   }
 
+  @media (max-width: 1023px) {
+    header {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .reserved {
+      display: none;
+    }
+  }
+
   @media (max-width: 767px) {
     header {
+      grid-template-columns: 1fr;
+      gap: 0;
       padding: 44px 0 40px;
     }
 

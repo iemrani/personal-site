@@ -8,28 +8,26 @@ const { title, summary } = Astro.props;
 ---
 
 <li>
-  <span class="title">{title}</span>
-  <span class="summary">{summary}</span>
+  <h3>{title}</h3>
+  <p class="summary">{summary}</p>
 </li>
 
 <style>
+  /* Same anatomy as ProjectCard so the two sections read as one system. */
   li {
-    padding: var(--space-3) 0;
+    min-width: 0;
+    padding: var(--space-4);
   }
 
-  li + li {
-    border-top: 1px solid var(--rule);
-  }
-
-  .title {
-    font-weight: 700;
-    /* Astro collapses the whitespace between the two adjacent spans, so the
-       gap has to come from CSS or the title runs into the summary. */
-    margin-right: 0.6em;
+  h3 {
+    font-size: var(--heading);
+    line-height: 1.3;
   }
 
   .summary {
+    margin-top: var(--space-2);
     font-size: var(--body-sm);
+    line-height: 1.6;
     color: var(--mute);
   }
 </style>
