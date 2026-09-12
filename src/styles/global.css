@@ -1,44 +1,20 @@
-/* Blueprint — see ~/.claude/design/blueprint/DESIGN.md
-   Monospace throughout, paper ground with dot matrix and column hairlines,
-   structure by 1px hairline only, zero radius, one accent. */
+/* Ported verbatim from the approved reference page:
+   ~/.claude/design/blueprint/reference.html
+   Do not improvise on top of this. Changes come from explicit instructions. */
 
 :root {
   --paper: #faf9f7;
-  --surface: #ffffff;
   --ink: #14140f;
   --mute: #6b6a63;
   --rule: #e2e0da;
   --dot: #d9d7d0;
-  --accent: #2323e6;
-
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
-    Consolas, monospace;
-
-  /* type scale, brief section Typography */
-  --display: 52px;
-  --heading: 16px;
-  --body: 13.5px;
-  --body-sm: 12.5px;
-  --label: 11px;
-  --micro: 10.5px;
-  --caption: 11.5px;
-
-  /* 8px base, brief section Layout */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 56px;
-
-  --measure: 44ch;
-  --container: 1120px;
+  --blue: #2323e6;
+  --green: #e8f3ea;
+  --red: #fbeaea;
   --col: 128px;
 }
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
@@ -48,13 +24,14 @@ html {
 
 body {
   margin: 0;
-  padding: 0 var(--space-4);
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: var(--body);
-  line-height: 1.65;
-  /* the blueprint: dot matrix over column hairlines */
+  font:
+    400 13.5px/1.65 "JetBrains Mono",
+    ui-monospace,
+    Menlo,
+    Consolas,
+    monospace;
   background-image:
     radial-gradient(var(--dot) 1px, transparent 1px),
     linear-gradient(90deg, var(--rule) 1px, transparent 1px);
@@ -63,43 +40,37 @@ body {
     var(--col) 100%;
 }
 
-main {
-  max-width: var(--container);
+.wrap {
+  max-width: 1120px;
   margin: 0 auto;
-}
-
-h1,
-h2,
-h3 {
-  margin: 0;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-p {
-  margin: 0;
+  padding: 0 24px;
 }
 
 a {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  color: var(--blue);
 }
 
-/* Sections are labelled, not headed. Brief: Typography > Principles. */
 .label {
-  font-size: var(--label);
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--mute);
-  margin: 0 0 var(--space-4);
+  margin: 0 0 24px;
+}
+
+.micro {
+  font-size: 10.5px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--mute);
 }
 
 section {
-  padding: var(--space-6) 0;
+  padding: 56px 0;
   border-bottom: 1px dashed var(--rule);
 }
 
@@ -110,6 +81,5 @@ section:last-of-type {
 @media (max-width: 767px) {
   :root {
     --col: 64px;
-    --display: 34px;
   }
 }

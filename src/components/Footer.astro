@@ -7,52 +7,31 @@ const links = [
 ---
 
 <footer id="contact">
-  <ul>
+  <p>
     {
-      links.map((link) => (
-        <li>
+      links.map((link, index) => (
+        <>
+          {index > 0 && <span> &middot; </span>}
           <a href={link.href}>{link.label}</a>
-        </li>
+        </>
       ))
     }
-  </ul>
+  </p>
   <p class="colophon">&copy; 2026 &middot; built and maintained by hand</p>
 </footer>
 
 <style>
   footer {
-    padding: var(--space-5) 0 var(--space-6);
-    border-top: 1px dashed var(--rule);
+    padding: 28px 0 56px;
+    font-size: 11.5px;
+    color: var(--mute);
   }
 
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+  p {
     margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* tag component: white fill, 1px ink border, zero radius */
-  li a {
-    display: inline-block;
-    padding: 6px 10px;
-    background: var(--surface);
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    font-size: var(--caption);
-    text-decoration: none;
-  }
-
-  li a:hover {
-    background: var(--ink);
-    color: var(--paper);
   }
 
   .colophon {
-    margin-top: var(--space-4);
-    font-size: var(--caption);
-    color: var(--mute);
+    margin-top: 8px;
   }
 </style>

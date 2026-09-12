@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
-import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -27,11 +27,11 @@ const { title, description } = Astro.props;
     />
   </head>
   <body>
-    <main>
+    <div class="wrap">
       <Nav />
-      <Header />
+      <Hero />
       <slot />
       <Footer />
-    </main>
+    </div>
   </body>
 </html>

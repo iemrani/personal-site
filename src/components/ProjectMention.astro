@@ -9,25 +9,26 @@ const { title, summary } = Astro.props;
 
 <li>
   <h3>{title}</h3>
-  <p class="summary">{summary}</p>
+  <p>{summary}</p>
 </li>
 
 <style>
-  /* Same anatomy as ProjectCard so the two sections read as one system. */
   li {
+    padding: 20px;
     min-width: 0;
-    padding: var(--space-4);
   }
 
   h3 {
-    font-size: var(--heading);
+    font-size: 16px;
+    font-weight: 700;
     line-height: 1.3;
+    margin: 0 0 8px;
   }
 
-  .summary {
-    margin-top: var(--space-2);
-    font-size: var(--body-sm);
+  p {
+    font-size: 12.5px;
     line-height: 1.6;
     color: var(--mute);
+    margin: 0;
   }
 </style>

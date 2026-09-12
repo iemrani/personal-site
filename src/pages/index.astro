@@ -11,17 +11,15 @@ const projects = (await getCollection('projects')).sort(
 const published = projects.filter((project) => project.data.url !== undefined);
 const unpublished = projects.filter((project) => project.data.url === undefined);
 
-// The card row must not leave empty columns when there are fewer than three
-// published projects; cap the track count at the number actually rendered.
-const columns = Math.min(published.length, 3);
-const mentionColumns = Math.min(unpublished.length, 3);
-
-// The stack row is derived from the projects' own `tech` fields, so it stays
-// true as projects are added and never claims anything a project does not.
+// The stack row is derived from the projects' own `tech` fields, so it never
+// claims anything a project does not declare.
 const stack = [
   ...new Set(
     projects.flatMap((project) =>
-      (project.data.tech ?? '').split(',').map((item) => item.trim()).filter(Boolean)
+      (project.data.tech ?? '')
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean)
     )
   ),
 ];
@@ -33,7 +31,7 @@ const stack = [
 >
   <section id="work">
     <p class="label">Selected work</p>
-    <div class="cards" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+    <div class="cards">
       {
         published.map((project) => (
           <ProjectCard
@@ -52,7 +50,7 @@ const stack = [
     unpublished.length > 0 && (
       <section id="also-built">
         <p class="label">Also built</p>
-        <ul class="cards mentions" style={`grid-template-columns: repeat(${mentionColumns}, 1fr)`}>
+        <ul class="cards">
           {unpublished.map((project) => (
             <ProjectMention title={project.data.title} summary={project.data.summary} />
           ))}
@@ -64,86 +62,74 @@ const stack = [
   {
     stack.length > 0 && (
       <section id="stack">
-        <p class="label">Built with</p>
-        <ul class="tags">
+        <p class="label">What I work with</p>
+        <div class="tags">
           {stack.map((item) => (
-            <li>{item}</li>
+            <span>{item}</span>
           ))}
-        </ul>
+        </div>
       </section>
     )
   }
 </Layout>
 
 <style>
-  /* card-row: one bordered container, children divided by internal rules */
+  /* card row: one bordered container, children divided by internal 1px rules */
   .cards {
     display: grid;
-    background: var(--surface);
+    grid-template-columns: repeat(3, 1fr);
     border: 1px solid var(--rule);
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
-  .cards > :global(article),
-  .cards > :global(li) {
+  .cards > :global(*) {
     border-right: 1px solid var(--rule);
   }
 
-  .cards > :global(article:last-child),
-  .cards > :global(li:last-child) {
+  .cards > :global(*:last-child) {
     border-right: 0;
   }
 
-  .mentions {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* tag component: white fill, 1px ink border, zero radius */
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    gap: 7px;
   }
 
-  .tags li {
-    padding: 6px 10px;
-    background: var(--surface);
+  .tags span {
+    background: #fff;
     border: 1px solid var(--ink);
-    font-size: var(--caption);
+    padding: 6px 10px;
+    font-size: 11.5px;
   }
 
   @media (max-width: 1023px) {
     .cards {
-      grid-template-columns: repeat(2, 1fr) !important;
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .cards > :global(article:nth-child(2n)),
-    .cards > :global(li:nth-child(2n)) {
+    .cards > :global(*:nth-child(2n)) {
       border-right: 0;
     }
 
-    .cards > :global(article:nth-child(n + 3)),
-    .cards > :global(li:nth-child(n + 3)) {
+    .cards > :global(*:nth-child(n + 3)) {
       border-top: 1px solid var(--rule);
     }
   }
 
   @media (max-width: 767px) {
     .cards {
-      grid-template-columns: 1fr !important;
+      grid-template-columns: 1fr;
     }
 
-    .cards > :global(article),
-    .cards > :global(li) {
+    .cards > :global(*) {
       border-right: 0;
     }
 
-    .cards > :global(article + article),
-    .cards > :global(li + li) {
+    .cards > :global(* + *) {
       border-top: 1px solid var(--rule);
     }
   }
