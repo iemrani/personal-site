@@ -14,13 +14,23 @@ const unpublished = projects.filter((project) => project.data.url === undefined)
 // The card row must not leave empty columns when there are fewer than three
 // published projects; cap the track count at the number actually rendered.
 const columns = Math.min(published.length, 3);
+
+// The stack row is derived from the projects' own `tech` fields, so it stays
+// true as projects are added and never claims anything a project does not.
+const stack = [
+  ...new Set(
+    projects.flatMap((project) =>
+      (project.data.tech ?? '').split(',').map((item) => item.trim()).filter(Boolean)
+    )
+  ),
+];
 ---
 
 <Layout
   title="Iman Emrani — AI and LLM engineer"
   description="Projects and contact details for Iman Emrani, an AI and LLM engineer based in Italy."
 >
-  <section>
+  <section id="work">
     <p class="label">Selected work</p>
     <div class="cards" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
       {
@@ -39,11 +49,24 @@ const columns = Math.min(published.length, 3);
 
   {
     unpublished.length > 0 && (
-      <section>
+      <section id="also-built">
         <p class="label">Also built</p>
         <ul class="mentions">
           {unpublished.map((project) => (
             <ProjectMention title={project.data.title} summary={project.data.summary} />
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  {
+    stack.length > 0 && (
+      <section id="stack">
+        <p class="label">Built with</p>
+        <ul class="tags">
+          {stack.map((item) => (
+            <li>{item}</li>
           ))}
         </ul>
       </section>
@@ -78,6 +101,23 @@ const columns = Math.min(published.length, 3);
 
   .mentions > :global(li) {
     max-width: 88ch;
+  }
+
+  /* tag component: white fill, 1px ink border, zero radius */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    padding: 6px 10px;
+    background: var(--surface);
+    border: 1px solid var(--ink);
+    font-size: var(--caption);
   }
 
   @media (max-width: 1023px) {

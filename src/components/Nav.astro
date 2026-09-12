@@ -1,0 +1,70 @@
+---
+const email = 'mailto:iemrani@icloud.com';
+---
+
+<nav>
+  <span class="mark" aria-hidden="true">IE</span>
+  <a class="nl" href="#work">work</a>
+  <a class="nl" href="#also-built">also built</a>
+  <a class="nl" href="#contact">contact</a>
+  <span class="spacer"></span>
+  <a class="btn" href={email}>email me &rsaquo;</a>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 26px;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    font-size: var(--body-sm);
+    font-weight: 700;
+  }
+
+  .nl {
+    color: var(--ink);
+    font-size: var(--body-sm);
+    text-decoration: none;
+  }
+
+  .nl:hover {
+    text-decoration: underline;
+  }
+
+  .spacer {
+    margin-left: auto;
+  }
+
+  /* button-primary: ink fill, paper text, zero radius */
+  .btn {
+    padding: 8px 13px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (max-width: 767px) {
+    nav {
+      gap: var(--space-3);
+    }
+
+    .spacer {
+      margin-left: 0;
+      flex-basis: 100%;
+      height: 0;
+    }
+  }
+</style>
