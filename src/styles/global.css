@@ -32,7 +32,9 @@
   --space-6: 56px;
 
   --measure: 44ch;
-  --container: 1120px;
+  /* Sized to the content that exists: one published project and three
+     mentions. At 1120px every box carried an empty right half. */
+  --container: 720px;
   --col: 128px;
 }
 
