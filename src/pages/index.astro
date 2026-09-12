@@ -1,136 +1,184 @@
 ---
-import { getCollection } from 'astro:content';
+// VERBATIM copy of the approved reference page:
+//   ~/.claude/design/blueprint/reference.html
+// Text included. Nothing here is the user's real content yet; every section is
+// placeholder copy to be replaced one at a time, on explicit instruction.
+// DO NOT DEPLOY while the panel still shows invented numbers.
 import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import ProjectMention from '../components/ProjectMention.astro';
-
-const projects = (await getCollection('projects')).sort(
-  (a, b) => a.data.order - b.data.order
-);
-
-const published = projects.filter((project) => project.data.url !== undefined);
-const unpublished = projects.filter((project) => project.data.url === undefined);
-
-// The stack row is derived from the projects' own `tech` fields, so it never
-// claims anything a project does not declare.
-const stack = [
-  ...new Set(
-    projects.flatMap((project) =>
-      (project.data.tech ?? '')
-        .split(',')
-        .map((item) => item.trim())
-        .filter(Boolean)
-    )
-  ),
-];
 ---
 
 <Layout
-  title="Iman Emrani — AI and LLM engineer"
-  description="Projects and contact details for Iman Emrani, an AI and LLM engineer based in Italy."
+  title="Blueprint reference"
+  description="Reference layout, pending real content."
 >
+<div class="wrap">
+
+  <nav>
+    <span class="mark">Y</span>
+    <a class="nl" href="#work">work</a>
+    <a class="nl" href="#writing">writing</a>
+    <a class="nl" href="#about">about</a>
+    <a class="nl" href="#contact">contact</a>
+    <span class="spacer"></span>
+    <a class="btn p" href="#cv">download cv &rsaquo;</a>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <h1>I build LLM systems that actually ship.</h1>
+      <p class="lead">Data scientist turned AI engineer. Agents, retrieval and evaluation, taken from notebook to production and kept running.</p>
+      <p class="sub">Currently building <a href="#work">ContractLens</a>, which classifies Ethereum contracts straight from bytecode.</p>
+      <div class="btns">
+        <a class="btn p" href="#work">&#9656; see the work</a>
+        <a class="btn s" href="#contact">get in touch &rarr;</a>
+      </div>
+      <p class="status"><i></i>available for roles in Italy and remote contract</p>
+    </div>
+
+    <div class="panel">
+      <div class="head"><span class="micro">sample report</span><span class="micro">contractlens</span></div>
+      <div class="score">
+        <div class="grade"><b>A</b><span class="micro">overall &middot; 94</span></div>
+        <div class="bars">
+          <div class="bar-row"><span>precision</span><span class="track"><i style="width:94%"></i></span><b>94</b></div>
+          <div class="bar-row"><span>recall</span><span class="track"><i style="width:88%"></i></span><b>88</b></div>
+          <div class="bar-row"><span>latency p95</span><span class="track"><i style="width:71%"></i></span><b>71</b></div>
+        </div>
+      </div>
+      <div class="note">Strong separation on liquidity pools, weaker on proxy contracts compiled before 0.8.0.</div>
+      <div class="diff">
+        <div class="h"><span class="micro">proposed edit</span><span class="micro">features/opcodes.py</span></div>
+<pre><span class="del">- window = 4  # fixed n-gram window</span><span class="add">+ window = adaptive(len(opcodes))  # scale with contract size</span></pre>
+      </div>
+    </div>
+  </div>
+
   <section id="work">
     <p class="label">Selected work</p>
     <div class="cards">
-      {
-        published.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            summary={project.data.summary}
-            tech={project.data.tech}
-            url={project.data.url!}
-            repo={project.data.repo}
-          />
-        ))
-      }
+      <div class="card">
+        <h3>ContractLens</h3>
+        <p>Classifies Ethereum contracts straight from bytecode. Trained on 40k labelled contracts.</p>
+        <p class="meta">pytorch &middot; aws</p>
+      </div>
+      <div class="card">
+        <h3>Genova</h3>
+        <p>A news pipeline with a scraper and an LLM fallback cascade, running daily without supervision.</p>
+        <p class="meta">python &middot; telegram</p>
+      </div>
+      <div class="card">
+        <h3>JobWatch</h3>
+        <p>Three-lane job scraper feeding one funnel. Fires every morning, dedupes, ranks, reports.</p>
+        <p class="meta">sqlite &middot; cron</p>
+      </div>
     </div>
   </section>
 
-  {
-    unpublished.length > 0 && (
-      <section id="also-built">
-        <p class="label">Also built</p>
-        <ul class="cards">
-          {unpublished.map((project) => (
-            <ProjectMention title={project.data.title} summary={project.data.summary} />
-          ))}
-        </ul>
-      </section>
-    )
-  }
+  <section id="about">
+    <p class="label">What I work with</p>
+    <div class="tags">
+      <span>python</span><span>pytorch</span><span>anthropic sdk</span><span>openai sdk</span>
+      <span>mcp</span><span>aws</span><span>sql</span><span>docker</span>
+    </div>
+  </section>
 
-  {
-    stack.length > 0 && (
-      <section id="stack">
-        <p class="label">What I work with</p>
-        <div class="tags">
-          {stack.map((item) => (
-            <span>{item}</span>
-          ))}
-        </div>
-      </section>
-    )
-  }
+  <footer id="contact">&copy; 2026 &middot; built and maintained by hand</footer>
+</div>
 </Layout>
 
-<style>
-  /* card row: one bordered container, children divided by internal 1px rules */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border: 1px solid var(--rule);
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+<style is:global>
+:root{
+  --paper:#faf9f7; --ink:#14140f; --mute:#6b6a63; --rule:#e2e0da;
+  --dot:#d9d7d0; --blue:#2323e6; --green:#e8f3ea; --red:#fbeaea;
+  --col:128px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 13.5px/1.65 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  background-image:
+    radial-gradient(var(--dot) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:16px 16px,var(--col) 100%;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:var(--blue)}
+.label{font-size:11px;font-weight:700;line-height:1.2;letter-spacing:1.2px;text-transform:uppercase;color:var(--mute);margin:0 0 24px}
+.micro{font-size:10.5px;font-weight:400;line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:var(--mute)}
 
-  .cards > :global(*) {
-    border-right: 1px solid var(--rule);
-  }
+/* nav */
+nav{display:flex;align-items:center;gap:22px;padding:16px 0;border-bottom:1px dashed var(--rule);flex-wrap:wrap}
+.mark{width:26px;height:26px;border:2px solid var(--ink);border-radius:6px;display:grid;place-items:center;font-weight:700;font-size:12px}
+nav a.nl{color:var(--ink);text-decoration:none;font-size:12.5px}
+nav a.nl:hover{text-decoration:underline}
+nav .spacer{margin-left:auto}
 
-  .cards > :global(*:last-child) {
-    border-right: 0;
-  }
+/* buttons */
+.btn{display:inline-flex;align-items:center;font-size:12px;font-weight:700;line-height:1;padding:11px 16px;text-decoration:none;border-radius:0;cursor:pointer;min-height:44px}
+.btn.p{background:var(--ink);color:var(--paper);border:0}
+.btn.s{background:var(--paper);color:var(--ink);border:1.5px solid var(--ink)}
+nav .btn{min-height:0;padding:8px 13px}
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding:70px 0 60px;border-bottom:1px dashed var(--rule)}
+h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-1px;margin:0 0 22px}
+.lead{max-width:44ch;margin:0 0 16px}
+.sub{max-width:44ch;margin:0 0 28px;color:var(--mute)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.status{font-size:11.5px;color:var(--mute);display:flex;align-items:flex-start;gap:7px}
+.status i{margin-top:6px}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--ink);flex:0 0 7px}
 
-  .tags span {
-    background: #fff;
-    border: 1px solid var(--ink);
-    padding: 6px 10px;
-    font-size: 11.5px;
-  }
+/* data panel */
+.hero>div{min-width:0}
+.panel{background:#fff;border:1px solid var(--rule);align-self:start;min-width:0}
+.panel .head{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid var(--rule)}
+.panel .score{display:flex;gap:22px;padding:16px 14px;align-items:center}
+.grade{text-align:center;flex:0 0 auto}
+.grade b{display:block;font-size:46px;font-weight:700;line-height:1;color:var(--blue)}
+.bars{flex:1;display:flex;flex-direction:column;gap:11px}
+.bar-row{display:grid;grid-template-columns:104px 1fr 26px;align-items:center;gap:10px;font-size:11.5px}
+.track{height:5px;background:var(--rule)}
+.track i{display:block;height:5px;background:var(--blue)}
+.bar-row b{font-weight:700;text-align:right}
+.panel .note{border-top:1px solid var(--rule);padding:10px 14px;font-size:11.5px;color:var(--mute)}
+.diff{border-top:1px solid var(--rule)}
+.diff .h{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid var(--rule)}
+.diff pre{margin:0;padding:10px 12px;font-size:11.5px;line-height:1.75;overflow-x:auto}
+.diff .del{background:var(--red);display:block}
+.diff .add{background:var(--green);display:block}
 
-  @media (max-width: 1023px) {
-    .cards {
-      grid-template-columns: repeat(2, 1fr);
-    }
+/* sections */
+section{padding:56px 0;border-bottom:1px dashed var(--rule)}
+section:last-of-type{border-bottom:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);background:#fff}
+.card{padding:20px;border-right:1px solid var(--rule);min-width:0}
+.card:last-child{border-right:0}
+.card h3{font-size:16px;font-weight:700;line-height:1.3;margin:0 0 8px}
+.card p{font-size:12.5px;line-height:1.6;color:var(--mute);margin:0 0 14px}
+.card .meta{font-size:11px;color:var(--blue)}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tags span{background:#fff;border:1px solid var(--ink);padding:6px 10px;font-size:11.5px}
+footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute)}
 
-    .cards > :global(*:nth-child(2n)) {
-      border-right: 0;
-    }
-
-    .cards > :global(*:nth-child(n + 3)) {
-      border-top: 1px solid var(--rule);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .cards {
-      grid-template-columns: 1fr;
-    }
-
-    .cards > :global(*) {
-      border-right: 0;
-    }
-
-    .cards > :global(* + *) {
-      border-top: 1px solid var(--rule);
-    }
-  }
+@media (max-width:1023px){
+  .hero{grid-template-columns:1fr;gap:40px;padding:52px 0 44px}
+  h1{font-size:40px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .card:nth-child(2){border-right:0}
+  .card:nth-child(3){border-top:1px solid var(--rule)}
+}
+@media (max-width:767px){
+  :root{--col:64px}
+  h1{font-size:34px;letter-spacing:-.6px}
+  .cards{grid-template-columns:1fr}
+  .card{border-right:0;border-top:1px solid var(--rule)}
+  .card:first-child{border-top:0}
+  .card:nth-child(3){border-top:1px solid var(--rule)}
+  .panel .score{flex-direction:column;align-items:flex-start;gap:14px}
+  .bars{width:100%}
+  .bar-row{grid-template-columns:88px 1fr 26px}
+  nav{gap:14px}
+}
 </style>
