@@ -10,6 +10,10 @@ const projects = (await getCollection('projects')).sort(
 
 const published = projects.filter((project) => project.data.url !== undefined);
 const unpublished = projects.filter((project) => project.data.url === undefined);
+
+// The card row must not leave empty columns when there are fewer than three
+// published projects; cap the track count at the number actually rendered.
+const columns = Math.min(published.length, 3);
 ---
 
 <Layout
@@ -17,8 +21,8 @@ const unpublished = projects.filter((project) => project.data.url === undefined)
   description="Projects and contact details for Iman Emrani, an AI and LLM engineer based in Italy."
 >
   <section>
-    <h2>Selected work</h2>
-    <div class="cards">
+    <p class="label">Selected work</p>
+    <div class="cards" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
       {
         published.map((project) => (
           <ProjectCard
@@ -36,7 +40,7 @@ const unpublished = projects.filter((project) => project.data.url === undefined)
   {
     unpublished.length > 0 && (
       <section>
-        <h2>Also built</h2>
+        <p class="label">Also built</p>
         <ul class="mentions">
           {unpublished.map((project) => (
             <ProjectMention title={project.data.title} summary={project.data.summary} />
@@ -48,20 +52,59 @@ const unpublished = projects.filter((project) => project.data.url === undefined)
 </Layout>
 
 <style>
-  h2 {
-    font-size: var(--step-2);
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-3);
-  }
-
+  /* card-row: one bordered container, children divided by internal rules */
   .cards {
     display: grid;
-    gap: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+  }
+
+  .cards > :global(article) {
+    border-right: 1px solid var(--rule);
+  }
+
+  .cards > :global(article:last-child) {
+    border-right: 0;
   }
 
   .mentions {
     margin: 0;
     padding: 0;
     list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding-inline: var(--space-4);
+  }
+
+  .mentions > :global(li) {
+    max-width: 88ch;
+  }
+
+  @media (max-width: 1023px) {
+    .cards {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .cards > :global(article:nth-child(2n)) {
+      border-right: 0;
+    }
+
+    .cards > :global(article:nth-child(n + 3)) {
+      border-top: 1px solid var(--rule);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .cards {
+      grid-template-columns: 1fr !important;
+    }
+
+    .cards > :global(article) {
+      border-right: 0;
+    }
+
+    .cards > :global(article + article) {
+      border-top: 1px solid var(--rule);
+    }
   }
 </style>

@@ -1,8 +1,8 @@
 ---
 const links = [
-  { label: 'GitHub', href: 'https://github.com/iemrani' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/iemrani' },
-  { label: 'Email', href: 'mailto:iemrani@icloud.com' },
+  { label: 'github', href: 'https://github.com/iemrani' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/iemrani' },
+  { label: 'email', href: 'mailto:iemrani@icloud.com' },
 ];
 ---
 
@@ -16,22 +16,43 @@ const links = [
       ))
     }
   </ul>
+  <p class="colophon">&copy; 2026 &middot; built and maintained by hand</p>
 </footer>
 
 <style>
   footer {
-    margin-top: var(--space-5);
-    padding-top: var(--space-3);
-    border-top: 1px solid var(--border);
+    padding: var(--space-5) 0 var(--space-6);
+    border-top: 1px dashed var(--rule);
   }
 
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    gap: var(--space-2);
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: var(--step--1);
+  }
+
+  /* tag component: white fill, 1px ink border, zero radius */
+  li a {
+    display: inline-block;
+    padding: 6px 10px;
+    background: var(--surface);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: var(--caption);
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .colophon {
+    margin-top: var(--space-4);
+    font-size: var(--caption);
+    color: var(--mute);
   }
 </style>

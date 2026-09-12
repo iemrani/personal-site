@@ -14,22 +14,22 @@ const { title, summary } = Astro.props;
 
 <style>
   li {
-    padding-top: var(--space-2);
+    padding: var(--space-3) 0;
   }
 
   li + li {
-    margin-top: var(--space-2);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--rule);
   }
 
   .title {
-    font-weight: 600;
+    font-weight: 700;
     /* Astro collapses the whitespace between the two adjacent spans, so the
        gap has to come from CSS or the title runs into the summary. */
-    margin-right: 0.4em;
+    margin-right: 0.6em;
   }
 
   .summary {
-    color: var(--text-muted);
+    font-size: var(--body-sm);
+    color: var(--mute);
   }
 </style>

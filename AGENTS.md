@@ -1,3 +1,15 @@
+## Design
+
+Follow `~/.claude/design/blueprint/DESIGN.md` for all UI work on this site.
+
+It is the approved look: warm paper ground, JetBrains Mono throughout including the
+headline, a dot matrix with column hairlines, structure by 1px hairline only, zero border
+radius, one blue accent, no shadows or gradients. A working page built to the brief sits
+at `~/.claude/design/blueprint/reference.html`.
+
+The site's current styling predates the brief and does not follow it. Ask before
+restyling existing pages; apply the brief to new work.
+
 ## Development
 
 When starting the dev server, use background mode:
