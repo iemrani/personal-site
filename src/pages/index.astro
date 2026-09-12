@@ -1,55 +1,49 @@
 ---
-// VERBATIM copy of the approved reference page:
-//   ~/.claude/design/blueprint/reference.html
-// Text included. Nothing here is the user's real content yet; every section is
-// placeholder copy to be replaced one at a time, on explicit instruction.
-// DO NOT DEPLOY while the panel still shows invented numbers.
+// The real page. Content approved section by section against the working copy at
+//   ~/.claude/design/blueprint/site.html
+// Keep the two in sync: edit there, then re-port here.
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Blueprint reference"
-  description="Reference layout, pending real content."
+  title="Iman Emrani"
+  description="AI and LLM engineer. I build agents and LLM systems that run on their own."
 >
 <div class="wrap">
 
   <nav>
-    <span class="mark">Y</span>
+    <span class="mark">IE</span>
     <a class="nl" href="#work">work</a>
-    <a class="nl" href="#writing">writing</a>
     <a class="nl" href="#about">about</a>
     <a class="nl" href="#contact">contact</a>
-    <span class="spacer"></span>
-    <a class="btn p" href="#cv">download cv &rsaquo;</a>
   </nav>
 
   <div class="hero">
     <div>
-      <h1>I build LLM systems that actually ship.</h1>
-      <p class="lead">Data scientist turned AI engineer. Agents, retrieval and evaluation, taken from notebook to production and kept running.</p>
-      <p class="sub">Currently building <a href="#work">ContractLens</a>, which classifies Ethereum contracts straight from bytecode.</p>
+      <h1>Shipped, not demoed.</h1>
+      <p class="lead">AI and LLM engineer. I build agents and LLM systems that run on their own, and I work directly with the people who use them.</p>
       <div class="btns">
         <a class="btn p" href="#work">&#9656; see the work</a>
-        <a class="btn s" href="#contact">get in touch &rarr;</a>
+        <a class="btn s" href="mailto:iemrani@icloud.com">email me &rarr;</a>
       </div>
-      <p class="status"><i></i>available for roles in Italy and remote contract</p>
+      <p class="status"><i></i>Authorised to work in Italy. Available worldwide as a remote contractor.</p>
     </div>
 
     <div class="panel">
-      <div class="head"><span class="micro">sample report</span><span class="micro">contractlens</span></div>
-      <div class="score">
-        <div class="grade"><b>A</b><span class="micro">overall &middot; 94</span></div>
-        <div class="bars">
-          <div class="bar-row"><span>precision</span><span class="track"><i style="width:94%"></i></span><b>94</b></div>
-          <div class="bar-row"><span>recall</span><span class="track"><i style="width:88%"></i></span><b>88</b></div>
-          <div class="bar-row"><span>latency p95</span><span class="track"><i style="width:71%"></i></span><b>71</b></div>
+      <div class="head"><span class="micro">running now</span><span class="micro">2 systems</span></div>
+      <div class="rows">
+        <div class="row">
+          <span class="nm"><i></i>Genova Live</span>
+          <span class="sc">continuous</span>
+          <span class="ds">News pipeline. Scrapes sources, falls back to an LLM when a scrape fails.</span>
+        </div>
+        <div class="row">
+          <span class="nm"><i></i>Jobwatch</span>
+          <span class="sc">daily 07:30</span>
+          <span class="ds">Three-lane job scraper. Dedupes, ranks, reports into one funnel.</span>
         </div>
       </div>
-      <div class="note">Strong separation on liquidity pools, weaker on proxy contracts compiled before 0.8.0.</div>
-      <div class="diff">
-        <div class="h"><span class="micro">proposed edit</span><span class="micro">features/opcodes.py</span></div>
-<pre><span class="del">- window = 4  # fixed n-gram window</span><span class="add">+ window = adaptive(len(opcodes))  # scale with contract size</span></pre>
-      </div>
+      <div class="note">Neither needs a person to start it.</div>
     </div>
   </div>
 
@@ -57,19 +51,19 @@ import Layout from '../layouts/Layout.astro';
     <p class="label">Selected work</p>
     <div class="cards">
       <div class="card">
-        <h3>ContractLens</h3>
-        <p>Classifies Ethereum contracts straight from bytecode. Trained on 40k labelled contracts.</p>
-        <p class="meta">pytorch &middot; aws</p>
+        <h3><a class="cl" href="https://iemrani.github.io/campaign-localisation-copilot">Campaign Localisation Copilot &rsaquo;</a></h3>
+        <p>Turns a campaign brief and a set of brand guidelines into localised copy for every market and channel, then checks it against the brand rules with a human approval queue and a full audit trail. Deployed and running.</p>
+        <p class="meta">fastapi &middot; anthropic sdk &middot; railway <span class="priv live">live</span></p>
       </div>
       <div class="card">
-        <h3>Genova</h3>
-        <p>A news pipeline with a scraper and an LLM fallback cascade, running daily without supervision.</p>
-        <p class="meta">python &middot; telegram</p>
+        <h3>Genova Live</h3>
+        <p>A Telegram news channel for Persian speakers who have just moved to Genova. It scrapes local sources, and falls back to a language model when a source changes shape or goes down.</p>
+        <p class="meta">python &middot; telegram <span class="priv">private</span></p>
       </div>
       <div class="card">
-        <h3>JobWatch</h3>
-        <p>Three-lane job scraper feeding one funnel. Fires every morning, dedupes, ranks, reports.</p>
-        <p class="meta">sqlite &middot; cron</p>
+        <h3>Jobwatch</h3>
+        <p>Finds AI and machine learning openings across three separate sources, removes the duplicates, scores what is left against one profile, and reports only what is worth reading.</p>
+        <p class="meta">sqlite &middot; cron <span class="priv">private</span></p>
       </div>
     </div>
   </section>
@@ -77,12 +71,22 @@ import Layout from '../layouts/Layout.astro';
   <section id="about">
     <p class="label">What I work with</p>
     <div class="tags">
-      <span>python</span><span>pytorch</span><span>anthropic sdk</span><span>openai sdk</span>
-      <span>mcp</span><span>aws</span><span>sql</span><span>docker</span>
+      <span>python</span><span>anthropic sdk</span><span>openai sdk</span><span>mcp</span>
+      <span>claude code</span><span>ollama</span><span>aws</span><span>azure</span>
+      <span>sql</span><span>docker</span>
     </div>
   </section>
 
-  <footer id="contact">&copy; 2026 &middot; built and maintained by hand</footer>
+  <footer id="contact">
+    <p class="label">Contact</p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/iemrani">linkedin</a>
+      <a href="https://github.com/iemrani">github</a>
+      <a href="mailto:iemrani@icloud.com">email</a>
+      <a href="https://x.com/emranix">x</a>
+    </div>
+    <p class="fine">&copy; 2026 &middot; built and maintained by hand</p>
+  </footer>
 </div>
 </Layout>
 
@@ -93,7 +97,8 @@ import Layout from '../layouts/Layout.astro';
   --col:128px;
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0; background:var(--paper); color:var(--ink);
   font:400 13.5px/1.65 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -109,7 +114,7 @@ a{color:var(--blue)}
 
 /* nav */
 nav{display:flex;align-items:center;gap:22px;padding:16px 0;border-bottom:1px dashed var(--rule);flex-wrap:wrap}
-.mark{width:26px;height:26px;border:2px solid var(--ink);border-radius:6px;display:grid;place-items:center;font-weight:700;font-size:12px}
+.mark{width:26px;height:26px;border:2px solid var(--ink);border-radius:0;display:grid;place-items:center;font-weight:700;font-size:12px}
 nav a.nl{color:var(--ink);text-decoration:none;font-size:12.5px}
 nav a.nl:hover{text-decoration:underline}
 nav .spacer{margin-left:auto}
@@ -134,6 +139,15 @@ h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-1px;margin:0 
 .hero>div{min-width:0}
 .panel{background:#fff;border:1px solid var(--rule);align-self:start;min-width:0}
 .panel .head{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid var(--rule)}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr auto;column-gap:14px;padding:13px 14px;border-bottom:1px solid var(--rule)}
+.row:last-child{border-bottom:0}
+.row .nm{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.row .nm i{width:6px;height:6px;border-radius:50%;background:var(--blue);flex:0 0 6px}
+.row .sc{font-size:11px;color:var(--mute);text-align:right;align-self:center}
+.row .ds{grid-column:1/-1;font-size:11.5px;line-height:1.55;color:var(--mute);margin-top:5px}
+.row .st{display:flex;align-items:center;justify-content:flex-end;gap:6px;font-size:11px;color:var(--blue);margin-top:5px}
+.row .st i{width:6px;height:6px;border-radius:50%;background:var(--blue);flex:0 0 6px}
 .panel .score{display:flex;gap:22px;padding:16px 14px;align-items:center}
 .grade{text-align:center;flex:0 0 auto}
 .grade b{display:block;font-size:46px;font-weight:700;line-height:1;color:var(--blue)}
@@ -156,11 +170,19 @@ section:last-of-type{border-bottom:0}
 .card{padding:20px;border-right:1px solid var(--rule);min-width:0}
 .card:last-child{border-right:0}
 .card h3{font-size:16px;font-weight:700;line-height:1.3;margin:0 0 8px}
+.card h3 a.cl{color:var(--ink);text-decoration:none}
+.card h3 a.cl:hover{text-decoration:underline}
 .card p{font-size:12.5px;line-height:1.6;color:var(--mute);margin:0 0 14px}
 .card .meta{font-size:11px;color:var(--blue)}
+.card .priv{display:inline-block;margin-left:8px;padding:2px 6px;border:1px solid var(--rule);color:var(--mute);font-size:10px;letter-spacing:.6px;text-transform:uppercase}
+.card .priv.live{border-color:var(--blue);color:var(--blue)}
 .tags{display:flex;flex-wrap:wrap;gap:7px}
 .tags span{background:#fff;border:1px solid var(--ink);padding:6px 10px;font-size:11.5px}
 footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute)}
+.social{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.social a{border:1px solid var(--ink);color:var(--ink);text-decoration:none;padding:7px 12px;font-size:11.5px}
+.social a:hover{background:var(--ink);color:var(--paper)}
+.fine{margin:0;font-size:11.5px;color:var(--mute)}
 
 @media (max-width:1023px){
   .hero{grid-template-columns:1fr;gap:40px;padding:52px 0 44px}
