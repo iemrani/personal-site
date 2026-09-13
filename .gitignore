@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local DNS snapshots, not part of the site
+.dns-backup/
