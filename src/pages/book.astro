@@ -129,18 +129,25 @@ const sessions = [
   var loaded = {};
 
   // Blueprint tokens, passed through so the embed does not look bolted on.
+  // The embed is an iframe on cal.com's origin, so it follows the VISITOR's
+  // system dark mode, not this page. Forcing theme:'light' is not enough on its
+  // own, so the dark palette is defined identically to the light one: whichever
+  // theme Cal decides to render, the colours are the Blueprint ones.
+  var VARS = {
+    'cal-brand': '#2323e6',
+    'cal-bg': '#ffffff',
+    'cal-bg-emphasis': '#faf9f7',
+    'cal-bg-muted': '#faf9f7',
+    'cal-border': '#e2e0da',
+    'cal-border-emphasis': '#e2e0da',
+    'cal-text': '#14140f',
+    'cal-text-emphasis': '#14140f',
+    'cal-text-subtle': '#6b6a63',
+    'cal-text-muted': '#6b6a63',
+  };
+
   var UI = {
-    cssVarsPerTheme: {
-      light: {
-        'cal-brand': '#2323e6',
-        'cal-bg': '#ffffff',
-        'cal-bg-emphasis': '#faf9f7',
-        'cal-border': '#e2e0da',
-        'cal-text': '#14140f',
-        'cal-text-emphasis': '#14140f',
-        'cal-text-subtle': '#6b6a63',
-      },
-    },
+    cssVarsPerTheme: { light: VARS, dark: VARS },
     hideEventTypeDetails: false,
     layout: 'month_view',
     theme: 'light',
@@ -164,6 +171,7 @@ const sessions = [
       elementOrSelector: box,
       calLink: CAL_USER + '/' + slug,
       layout: 'month_view',
+      config: { theme: 'light' },
     });
     Cal.ns[slug]('ui', UI);
   }
