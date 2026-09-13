@@ -92,6 +92,20 @@ import Layout from '../layouts/Layout.astro';
 <script is:inline>
   // Fragment links animate the scroll directly. CSS scroll-behavior is honoured on
   // some browsers and silently ignored on others; this makes it consistent.
+  function animateTo(top, duration) {
+    var start = window.scrollY;
+    var delta = top - start;
+    var t0 = null;
+    function step(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / duration, 1);
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo(0, start + delta * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener('click', function (e) {
       var href = a.getAttribute('href');
@@ -100,7 +114,8 @@ import Layout from '../layouts/Layout.astro';
       e.preventDefault();
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var top = target.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+      if (reduce) window.scrollTo(0, top);
+      else animateTo(top, 520);
       history.pushState(null, '', href);
     });
   });
