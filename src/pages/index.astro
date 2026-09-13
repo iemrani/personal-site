@@ -88,6 +88,22 @@ import Layout from '../layouts/Layout.astro';
     <p class="fine">&copy; 2026 &middot; built and maintained by hand</p>
   </footer>
 </div>
+
+<script is:inline>
+  // Fragment links animate the scroll directly. CSS scroll-behavior is honoured on
+  // some browsers and silently ignored on others; this makes it consistent.
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var href = a.getAttribute('href');
+      var target = href.length > 1 && document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+      history.pushState(null, '', href);
+    });
+  });
+</script>
 </Layout>
 
 <style is:global>
