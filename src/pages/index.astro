@@ -106,19 +106,22 @@ import Layout from '../layouts/Layout.astro';
     requestAnimationFrame(step);
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var href = a.getAttribute('href');
-      var target = href.length > 1 && document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var top = target.getBoundingClientRect().top + window.scrollY;
-      if (reduce) window.scrollTo(0, top);
-      else animateTo(top, 520);
-      history.pushState(null, '', href);
-    });
-  });
+  // Capture phase on the document: runs before any other handler and before the
+  // browser's own jump, so nothing downstream can bypass it.
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href.length < 2) return;
+    var target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var top = target.getBoundingClientRect().top + window.scrollY;
+    if (reduce) window.scrollTo(0, top);
+    else animateTo(top, 520);
+    history.pushState(null, '', href);
+  }, true);
 </script>
 </Layout>
 
