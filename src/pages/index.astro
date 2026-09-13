@@ -99,7 +99,7 @@ import Layout from '../layouts/Layout.astro';
     function step(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / duration, 1);
-      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      var e = 1 - Math.pow(1 - p, 3);
       window.scrollTo(0, start + delta * e);
       if (p < 1) requestAnimationFrame(step);
     }
@@ -119,7 +119,7 @@ import Layout from '../layouts/Layout.astro';
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var top = target.getBoundingClientRect().top + window.scrollY;
     if (reduce) window.scrollTo(0, top);
-    else animateTo(top, 520);
+    else animateTo(top, 480);
     history.pushState(null, '', href);
   }, true);
 </script>
