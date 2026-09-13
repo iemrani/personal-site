@@ -75,8 +75,8 @@ const sessions = [
       <div id="cal-inline"></div>
       <noscript>
         <p class="fallback">
-          The calendar needs JavaScript. Email me at
-          <a href="mailto:iemrani@icloud.com">iemrani@icloud.com</a> and I will send times.
+          The calendar needs JavaScript. Turn it on, or message me on
+          <a href="https://www.linkedin.com/in/iemrani">LinkedIn</a> and I will send times.
         </p>
       </noscript>
     </div>
@@ -85,13 +85,24 @@ const sessions = [
   <footer id="contact">
     <p class="label">Rather not book?</p>
     <div class="social">
-      <a href="mailto:iemrani@icloud.com">email</a>
+      <a data-u="iman" data-d="iemrani.com">email</a>
       <a href="https://www.linkedin.com/in/iemrani">linkedin</a>
       <a href="https://github.com/iemrani">github</a>
     </div>
     <p class="fine">&copy; 2026 &middot; built and maintained by hand</p>
   </footer>
 </div>
+
+<script is:inline>
+  // The address is assembled at runtime so it never appears in the page source.
+  // This stops the harvesters that only read HTML; one driving a real browser
+  // will still get it, and nothing prevents that.
+  document.querySelectorAll('a[data-u][data-d]').forEach(function (a) {
+    var addr = a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+    a.href = 'mail' + 'to:' + addr;
+    if (a.dataset.show === 'addr') a.textContent = addr;
+  });
+</script>
 
 <script is:inline define:vars={{ CAL_USER }}>
   // Cal.com embed loader. Lifted from Cal's official snippet, reformatted.
