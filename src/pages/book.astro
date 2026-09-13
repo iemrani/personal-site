@@ -1,0 +1,263 @@
+---
+// Booking page. Blueprint frame + a Cal.com inline embed.
+// The only thing to change after creating the Cal.com account is CAL_USER below,
+// and the three `slug` values if the event types are named differently there.
+import Layout from '../layouts/Layout.astro';
+
+const CAL_USER = 'iemrani';
+
+const sessions = [
+  {
+    slug: 'intro',
+    name: 'First call',
+    len: '20 min',
+    cost: 'free',
+    desc: 'A first conversation. What you are building, what is in the way, whether I am the right person for it.',
+  },
+  {
+    slug: 'consultation',
+    name: 'Consultation',
+    len: '60 min',
+    cost: 'paid',
+    desc: 'A working session on a specific problem: an agent that misbehaves, an LLM feature you are scoping, a pipeline that keeps breaking. You leave with a plan.',
+  },
+];
+---
+
+<Layout
+  title="Book a call · Iman Emrani"
+  description="Book an intro call, a paid consultation, or a technical interview with Iman Emrani, AI and LLM engineer."
+>
+<div class="wrap">
+
+  <nav>
+    <a class="mark" href="/">IE</a>
+    <a class="nl" href="/#work">work</a>
+    <a class="nl" href="/#about">about</a>
+    <a class="nl" href="/#contact">contact</a>
+    <span class="spacer"></span>
+    <a class="nl back" href="/">&larr; back to the site</a>
+  </nav>
+
+  <header class="top">
+    <h1>Book a call.</h1>
+    <p class="lead">Pick the kind of conversation you want. Times are shown in your own timezone; I am in Europe/Rome and work with people outside it every week.</p>
+  </header>
+
+  <section class="picker">
+    <p class="label">Session types</p>
+    <div class="panel">
+      <div class="head">
+        <span class="micro">choose one</span>
+        <span class="micro">2 types</span>
+      </div>
+      <div class="rows">
+        {sessions.map((s, i) => (
+          <button
+            class:list={['row', 'srow', { on: i === 0 }]}
+            type="button"
+            data-slug={s.slug}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            <span class="nm"><i></i>{s.name}</span>
+            <span class="sc">{s.len} &middot; {s.cost}</span>
+            <span class="ds">{s.desc}</span>
+          </button>
+        ))}
+      </div>
+      <div class="note">No charge for the intro call, and no obligation after it.</div>
+    </div>
+  </section>
+
+  <section class="cal">
+    <p class="label">Pick a time</p>
+    <div class="calframe">
+      <div id="cal-inline"></div>
+      <noscript>
+        <p class="fallback">
+          The calendar needs JavaScript. Email me at
+          <a href="mailto:iemrani@icloud.com">iemrani@icloud.com</a> and I will send times.
+        </p>
+      </noscript>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p class="label">Rather not book?</p>
+    <div class="social">
+      <a href="mailto:iemrani@icloud.com">email</a>
+      <a href="https://www.linkedin.com/in/iemrani">linkedin</a>
+      <a href="https://github.com/iemrani">github</a>
+    </div>
+    <p class="fine">&copy; 2026 &middot; built and maintained by hand</p>
+  </footer>
+</div>
+
+<script is:inline define:vars={{ CAL_USER }}>
+  // Cal.com embed loader. Lifted from Cal's official snippet, reformatted.
+  (function (C, A, L) {
+    var p = function (a, ar) { a.q.push(ar); };
+    var d = C.document;
+    C.Cal = C.Cal || function () {
+      var cal = C.Cal;
+      var ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement('script')).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        var api = function () { p(api, arguments); };
+        var namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === 'string') {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ['initNamespace', namespace]);
+        } else {
+          p(cal, ar);
+        }
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, 'https://app.cal.com/embed/embed.js', 'init');
+
+  var host = document.getElementById('cal-inline');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.srow'));
+  var loaded = {};
+
+  // Blueprint tokens, passed through so the embed does not look bolted on.
+  var UI = {
+    cssVarsPerTheme: {
+      light: {
+        'cal-brand': '#2323e6',
+        'cal-bg': '#ffffff',
+        'cal-bg-emphasis': '#faf9f7',
+        'cal-border': '#e2e0da',
+        'cal-text': '#14140f',
+        'cal-text-emphasis': '#14140f',
+        'cal-text-subtle': '#6b6a63',
+      },
+    },
+    hideEventTypeDetails: false,
+    layout: 'month_view',
+    theme: 'light',
+  };
+
+  function show(slug) {
+    // One Cal namespace per session type. Initialise on first use, then just
+    // toggle visibility, so switching back is instant and never re-fetches.
+    Object.keys(loaded).forEach(function (k) {
+      loaded[k].hidden = k !== slug;
+    });
+    if (loaded[slug]) return;
+
+    var box = document.createElement('div');
+    box.className = 'cal-slot';
+    host.appendChild(box);
+    loaded[slug] = box;
+
+    Cal('init', slug, { origin: 'https://app.cal.com' });
+    Cal.ns[slug]('inline', {
+      elementOrSelector: box,
+      calLink: CAL_USER + '/' + slug,
+      layout: 'month_view',
+    });
+    Cal.ns[slug]('ui', UI);
+  }
+
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
+      rows.forEach(function (r) {
+        var on = r === row;
+        r.classList.toggle('on', on);
+        r.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      show(row.dataset.slug);
+    });
+  });
+
+  show(rows[0].dataset.slug);
+</script>
+
+<style is:global>
+:root{
+  --paper:#faf9f7; --ink:#14140f; --mute:#6b6a63; --rule:#e2e0da;
+  --dot:#d9d7d0; --blue:#2323e6; --col:128px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 13.5px/1.65 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  background-image:
+    radial-gradient(var(--dot) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:16px 16px,var(--col) 100%;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:var(--blue)}
+.label{font-size:11px;font-weight:700;line-height:1.2;letter-spacing:1.2px;text-transform:uppercase;color:var(--mute);margin:0 0 24px}
+.micro{font-size:10.5px;font-weight:400;line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:var(--mute)}
+
+/* nav */
+nav{display:flex;align-items:center;gap:22px;padding:16px 0;border-bottom:1px dashed var(--rule);flex-wrap:wrap}
+.mark{width:26px;height:26px;border:2px solid var(--ink);border-radius:0;display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--ink);text-decoration:none}
+nav a.nl{color:var(--ink);text-decoration:none;font-size:12.5px}
+nav a.nl:hover{text-decoration:underline}
+nav .spacer{margin-left:auto}
+nav a.back{color:var(--mute)}
+
+/* header */
+.top{padding:56px 0 44px;border-bottom:1px dashed var(--rule)}
+h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-1px;margin:0 0 22px}
+.lead{max-width:58ch;margin:0;color:var(--mute)}
+
+/* sections */
+section{padding:48px 0;border-bottom:1px dashed var(--rule)}
+
+/* session picker, built on the homepage data panel */
+.panel{background:#fff;border:1px solid var(--rule)}
+.panel .head{display:flex;justify-content:space-between;gap:12px;padding:7px 12px;border-bottom:1px solid var(--rule)}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:1fr auto;column-gap:14px;padding:13px 14px;border-bottom:1px solid var(--rule);text-align:left}
+.row:last-child{border-bottom:0}
+.row .nm{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+.row .nm i{width:6px;height:6px;border-radius:50%;background:var(--rule);flex:0 0 6px}
+.row .sc{font-size:11px;color:var(--mute);text-align:right;align-self:center}
+.row .ds{grid-column:1/-1;font-size:11.5px;line-height:1.55;color:var(--mute);margin-top:5px}
+.panel .note{border-top:1px solid var(--rule);padding:10px 14px;font-size:11.5px;color:var(--mute)}
+
+.srow{font:inherit;background:#fff;border-left:0;border-right:0;border-top:0;width:100%;cursor:pointer;min-height:44px}
+.srow:hover{background:var(--paper)}
+.srow.on{background:var(--paper);box-shadow:inset 3px 0 0 var(--blue)}
+.srow.on .nm i{background:var(--blue)}
+.srow:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+
+/* the embed */
+.calframe{background:#fff;border:1px solid var(--rule);padding:8px;min-height:620px}
+.cal-slot{width:100%}
+.cal-slot[hidden]{display:none}
+.fallback{margin:0;padding:24px;font-size:12.5px;color:var(--mute)}
+
+footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute);border-bottom:0}
+.social{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.social a{border:1px solid var(--ink);color:var(--ink);text-decoration:none;padding:7px 12px;font-size:11.5px}
+.social a:hover{background:var(--ink);color:var(--paper)}
+.fine{margin:0;font-size:11.5px;color:var(--mute)}
+
+@media (max-width:1023px){
+  .top{padding:44px 0 36px}
+  h1{font-size:40px}
+}
+@media (max-width:767px){
+  :root{--col:64px}
+  h1{font-size:34px;letter-spacing:-.6px}
+  nav{gap:14px}
+  nav .spacer{display:none}
+  .calframe{min-height:560px;padding:4px}
+}
+</style>
+</Layout>
