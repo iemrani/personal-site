@@ -202,9 +202,17 @@ const sessions = [
     if (loaded[slug]) return;
 
     var box = document.createElement('div');
-    box.className = 'cal-slot';
+    box.className = 'cal-slot pinned';
     host.appendChild(box);
     loaded[slug] = box;
+
+    // Release the height lock when Cal says the booker has painted, and on a
+    // timer as well: a lock left on by an embed that never reports ready would
+    // clip the calendar, and Cal hides the scrollbar inside that container, so
+    // the clipped part would be unreachable. Failing open is the safe side.
+    var unpin = function () { box.classList.remove('pinned'); };
+    ns(slug)('on', { action: 'linkReady', callback: unpin });
+    setTimeout(unpin, 8000);
 
     ns(slug)('inline', {
       elementOrSelector: box,
@@ -316,6 +324,16 @@ section{padding:48px 0;border-bottom:1px dashed var(--rule)}
 .calframe{background:#fff;border:1px solid var(--rule);padding:8px;min-height:620px}
 .cal-slot{width:100%}
 .cal-slot[hidden]{display:none}
+/* Cal sizes the embed by postMessage, and the booker reports a wrong height
+   first (measured live: 490 skeleton, then 760, then the true 570), which
+   stretched the frame and shoved the footer down for about 400ms. While Cal is
+   still loading the slot is locked to the frame's own height so the overshoot
+   has nowhere to go; the lock comes off on linkReady, after which Cal resizes
+   freely and the taller steps later in the booking flow still work.
+   602 = the frame's 620 min-height less its 8px padding and 1px border (the page
+   is border-box), 550 the same on mobile. Off by a pixel and the frame still
+   settles visibly. */
+.cal-slot.pinned{height:602px;overflow:hidden}
 .fallback{margin:0;padding:24px;font-size:12.5px;color:var(--mute)}
 
 footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute);border-bottom:0}
@@ -334,6 +352,7 @@ footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute);border-bottom:0}
   nav{gap:14px}
   nav .spacer{display:none}
   .calframe{min-height:560px;padding:4px}
+  .cal-slot.pinned{height:550px}
 }
 </style>
 </Layout>
