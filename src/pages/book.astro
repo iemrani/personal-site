@@ -28,6 +28,19 @@ const sessions = [
   title="Book a call · Iman Emrani"
   description="Book an intro call, a paid consultation, or a technical interview with Iman Emrani, AI and LLM engineer."
 >
+<Fragment slot="head">
+  {/*
+    The calendar is three sequential hops to a cold origin: embed.js, then the
+    iframe page, then Cal's own app fetching availability inside it. Only the
+    first two are ours to speed up. The preconnect gets DNS and TLS out of the
+    way before any of it runs, and the preload starts embed.js downloading
+    during head parsing instead of after the body script at the foot of the page.
+    No `crossorigin` on the preload: the loader injects a plain <script>, and a
+    mismatched mode would make the browser fetch the file twice.
+  */}
+  <link rel="preconnect" href="https://app.cal.com" />
+  <link rel="preload" as="script" href="https://app.cal.com/embed/embed.js" />
+</Fragment>
 <div class="wrap">
 
   <nav>
@@ -164,6 +177,22 @@ const sessions = [
     theme: 'light',
   };
 
+  // Cal's inline embed ships two loading states and picks between them on this
+  // value alone: with a pageType it draws the full booker skeleton (meta column
+  // and a month grid), without one it draws a bare 30px spinner. The spinner in
+  // a 620px white frame is what reads as "nothing is happening", so name the
+  // page type. The two Cal accepts are user.* and team.*; this is a user account.
+  var PAGE_TYPE = 'user.event.booking.slots';
+
+  var inited = {};
+  function ns(slug) {
+    if (!inited[slug]) {
+      Cal('init', slug, { origin: 'https://app.cal.com' });
+      inited[slug] = true;
+    }
+    return Cal.ns[slug];
+  }
+
   function show(slug) {
     // One Cal namespace per session type. Initialise on first use, then just
     // toggle visibility, so switching back is instant and never re-fetches.
@@ -177,14 +206,29 @@ const sessions = [
     host.appendChild(box);
     loaded[slug] = box;
 
-    Cal('init', slug, { origin: 'https://app.cal.com' });
-    Cal.ns[slug]('inline', {
+    ns(slug)('inline', {
       elementOrSelector: box,
       calLink: CAL_USER + '/' + slug,
       layout: 'month_view',
-      config: { theme: 'light' },
+      config: { theme: 'light', 'cal.embed.pageType': PAGE_TYPE },
     });
-    Cal.ns[slug]('ui', UI);
+    ns(slug)('ui', UI);
+  }
+
+  // Warm the session type the visitor did NOT land on, so picking it later does
+  // not repeat the whole chain from cold. For an inline embed Cal's preload
+  // loads the link in a hidden 0x0 iframe, which fills the browser cache with
+  // the shared chunks; the second embed then only has its own HTML to fetch.
+  // Held back until the first calendar is up so it never competes with it, and
+  // skipped on metered or slow connections, where a 600KB speculative load is
+  // a cost the visitor did not ask for.
+  function warmTheRest(first) {
+    var c = navigator.connection;
+    if (c && (c.saveData || /2g/.test(c.effectiveType || ''))) return;
+    rows.forEach(function (r) {
+      var slug = r.dataset.slug;
+      if (slug !== first) ns(slug)('preload', { calLink: CAL_USER + '/' + slug });
+    });
   }
 
   rows.forEach(function (row) {
@@ -198,7 +242,20 @@ const sessions = [
     });
   });
 
-  show(rows[0].dataset.slug);
+  var first = rows[0].dataset.slug;
+  show(first);
+
+  // linkReady is Cal's own "the calendar has painted" signal, the same one it
+  // uses to drop its skeleton. The timer is the fallback for the case where it
+  // never fires, so a broken first embed cannot leave the second one cold.
+  var warmed = false;
+  function warmOnce() {
+    if (warmed) return;
+    warmed = true;
+    warmTheRest(first);
+  }
+  ns(first)('on', { action: 'linkReady', callback: warmOnce });
+  setTimeout(warmOnce, 8000);
 </script>
 
 <style is:global>
