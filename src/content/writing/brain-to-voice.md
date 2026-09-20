@@ -29,7 +29,7 @@ problem is not the implant.
 ## 01. It is not reading his mind. It is reading his mouth.
 
 ![Where the implant listens](/writing/brain-to-voice/fig-01-speech-chain.png)
-*Figure 1. The tap sits downstream of intention, which is why this recovers attempted speech and not thought.*
+*Figure 1. The tap sits downstream of intention, which is why this recovers attempted speech and not thought. Electrode count: Neuralink N1 published specification. Cortical target after Card et al., NEJM, 15 Aug 2024 (left precentral gyrus, 256 electrodes).*
 
 The electrodes do not sit near anything that stores meaning. They sit on the strip of
 cortex that drives the mouth, tongue, jaw and larynx.
@@ -53,7 +53,7 @@ Four times the electrodes. Same target.
 ## 02. Two models, not one
 
 ![Two models, not one](/writing/brain-to-voice/fig-02-two-models.png)
-*Figure 2. Two models, two training sets, and plain text as the handoff between them.*
+*Figure 2. Two models, two training sets, and plain text as the handoff between them. Decoder figures: Card et al., NEJM, 15 Aug 2024. Electrode count: Neuralink N1. Voice model per Neuralink's post of 18 Sep 2026.*
 
 Terry's voice is the output of two separate systems, trained on two separate datasets,
 with a handoff in the middle.
@@ -77,7 +77,7 @@ model A. The thing that makes his family cry is model B.
 ## 03. The decoder does not guess words. It guesses sounds.
 
 ![Sounds first, words later](/writing/brain-to-voice/fig-03-phonemes.png)
-*Figure 3. One sound every 80 ms, from about forty classes. Language models assemble the sentence.*
+*Figure 3. One sound every 80 ms, from about forty classes. Language models assemble the sentence. Why it matters: 213 sentences over 30 minutes were enough to reach 99.6% on a 50-word vocabulary. A further 260 sentences over 1.4 hours opened the system to 125,000 words at 90.2%. A model asked to learn 125,000 word classes from one person's speech attempts would never see enough of each. Source: Card et al., "An Accurate and Rapidly Calibrating Speech Neuroprosthesis", NEJM, 15 Aug 2024. Sounds shown as plain-English respellings, not IPA.*
 
 Model A never tries to output a word. It outputs a phoneme, one of the roughly forty
 sound units of English, and in the best documented system it does so **once every 80
@@ -103,7 +103,7 @@ Half an hour of data. Because the model was asked to learn sounds, not words.
 ## 04. Why he mimed first, and thought second
 
 ![Why mime before thinking](/writing/brain-to-voice/fig-04-inner-speech.png)
-*Figure 4. Inner speech sits inside attempted speech: the same pattern, quieter. That is why training transfers.*
+*Figure 4. Inner speech sits inside attempted speech: the same pattern, quieter. That is why training transfers. Containment finding: Kunz et al., "Inner speech in motor cortex and implications for speech neuroprostheses", Cell, 14 Aug 2025, four participants. Curriculum order as described by Neuralink for the VOICE trial, 18 Sep 2026. Neuralink has published no peer-reviewed account of its own decoder.*
 
 Now the part the video skips.
 
@@ -129,7 +129,7 @@ model what his silence would later look like.
 ## 05. What it cannot do
 
 ![The cost of only thinking](/writing/brain-to-voice/fig-05-accuracy.png)
-*Figure 5. Word accuracy across four conditions. Thinking instead of trying costs real accuracy.*
+*Figure 5. Word accuracy across four conditions. Thinking instead of trying costs real accuracy. Read the last bar against the third, not the first. The three attempted bars are one participant at UC Davis (Card et al., NEJM, 15 Aug 2024); the imagined bar is a different study, four participants at Stanford (Kunz et al., Cell, 14 Aug 2025). Different people and implants, so treat the gap as indicative, not measured head to head.*
 
 **It needs you to try.** Inner speech is quieter, and accuracy drops with it: the Stanford
 system read imagined sentences from a 125,000-word vocabulary at 74%, against 97.5% for

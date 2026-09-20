@@ -110,7 +110,7 @@ const fmt = (d: Date) =>
 
 /* Figures. In the markdown the image and its caption sit on adjacent lines, so they
    render as ONE paragraph: <p><img><em>caption</em></p>. Style that paragraph as the
-   figure block. Do not reach for `p:has(img) + p` — there is no following paragraph. */
+   figure block. Do not reach for `p:has(img) + p`: there is no following paragraph. */
 .article p:has(> img){max-width:none;width:min(100%,900px);margin:0 0 32px}
 .article p:has(> img) img{
   display:block;width:100%;height:auto;margin:0 0 10px;
@@ -132,5 +132,15 @@ nav a.back{color:var(--mute)}
   .article{padding:32px 0 8px}
   .article p{font-size:13.5px}
   .article h2{margin:40px 0 16px}
+
+  /* Figures. The SVG inside each PNG is drawn on a 1000-unit canvas, so at phone
+     width the labels would land near 4px. Hold the image at 700px and let the
+     figure scroll sideways instead. The caption is in the same paragraph, so it
+     would inherit that 700px: pin it to the scrollport and cap it to the screen. */
+  .article p:has(> img){overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .article p:has(> img) img{min-width:700px}
+  .article p:has(> img) em{
+    position:sticky;left:0;width:calc(100vw - 48px);max-width:74ch;
+  }
 }
 </style>
