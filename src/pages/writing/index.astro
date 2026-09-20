@@ -1,0 +1,102 @@
+---
+// The article index. Entries come from the `writing` collection, newest first.
+// Drafts are excluded here and in [...slug].astro; keep the two filters in step.
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title="Writing — Iman Emrani"
+  description="Notes on how AI systems actually work, written up from the published research."
+>
+<div class="wrap">
+
+  <nav>
+    <a class="mark" href="/">IE</a>
+    <a class="nl" href="/#work">work</a>
+    <a class="nl" href="/#about">about</a>
+    <a class="nl" href="/#contact">contact</a>
+    <span class="spacer"></span>
+    <a class="nl back" href="/">&larr; back to the site</a>
+  </nav>
+
+  <header class="masthead">
+    <h1>Writing</h1>
+    <p class="blurb">I take something people are already talking about and work out what is
+    actually happening underneath, from the papers rather than the press release. If a number
+    is here, its source is here too.</p>
+  </header>
+
+  <section class="list">
+    {posts.length === 0 && <p class="empty">Nothing published yet.</p>}
+    {posts.map((post) => (
+      <article class="item">
+        <p class="micro when"><time datetime={post.data.date.toISOString().slice(0, 10)}>{fmt(post.data.date)}</time></p>
+        <h2><a href={`/writing/${post.id}/`}>{post.data.title}</a></h2>
+        <p class="sum">{post.data.summary}</p>
+        <p class="more"><a href={`/writing/${post.id}/`}>read it &rsaquo;</a></p>
+      </article>
+    ))}
+  </section>
+
+  <footer>
+    <p class="label">Contact</p>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/iemrani">linkedin</a>
+      <a href="https://github.com/iemrani">github</a>
+      <a data-u="iman" data-d="iemrani.com">email</a>
+      <a href="https://x.com/emranix">x</a>
+    </div>
+    <p class="fine">&copy; 2026 &middot; built and maintained by hand</p>
+  </footer>
+</div>
+
+<script is:inline>
+  // Same trick as the home page: the address is assembled at runtime so it never
+  // appears in the served HTML.
+  document.querySelectorAll('a[data-u][data-d]').forEach(function (a) {
+    var addr = a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+    a.href = 'mail' + 'to:' + addr;
+    if (a.dataset.show === 'addr') a.textContent = addr;
+  });
+</script>
+</Layout>
+
+<style is:global>
+/* Reading pages run in a narrower frame than the home page. At 1120 a single text
+   column is stranded against the left edge of a wide screen; at 960 the column is
+   the page. */
+.wrap{max-width:960px}
+
+.masthead{padding:70px 0 44px;border-bottom:1px dashed var(--rule)}
+.masthead h1{font-size:52px;font-weight:700;line-height:1.04;letter-spacing:-1px;margin:0 0 20px}
+.blurb{max-width:58ch;margin:0;color:var(--mute);font-size:14px}
+
+.list{padding:0;border-bottom:0}
+.item{padding:32px 0;border-bottom:1px dashed var(--rule)}
+.item:last-child{border-bottom:0}
+.item .when{margin:0 0 10px}
+.item h2{font-size:24px;font-weight:700;line-height:1.25;letter-spacing:-.4px;margin:0 0 12px;max-width:34ch}
+.item h2 a{color:var(--ink);text-decoration:none}
+.item h2 a:hover{text-decoration:underline}
+.item .sum{margin:0 0 14px;max-width:62ch;color:var(--mute);font-size:13px}
+.item .more{margin:0;font-size:12px}
+.item .more a{text-decoration:none}
+.item .more a:hover{text-decoration:underline}
+.empty{color:var(--mute);padding:32px 0}
+
+nav a.back{color:var(--mute)}
+
+@media (max-width:767px){
+  .masthead{padding:52px 0 36px}
+  .masthead h1{font-size:34px;letter-spacing:-.6px}
+  .item h2{font-size:20px}
+}
+</style>

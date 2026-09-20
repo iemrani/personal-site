@@ -14,4 +14,16 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+// Articles. Ordered by `date` descending, so a new piece needs no `order` field.
+// `draft: true` keeps an entry off the index and off the site.
+const writing = defineCollection({
+  loader: glob({ base: './src/content/writing', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    summary: z.string(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { projects, writing };

@@ -27,3 +27,60 @@ const { title, description } = Astro.props;
     <slot />
   </body>
 </html>
+
+<!--
+  Shared base: the Blueprint tokens and the chrome every page repeats (nav, buttons,
+  footer). Added 2026-09-20 with the /writing section, so new pages stop carrying
+  another copy of it.
+
+  `index.astro` and `book.astro` still carry their own copies and are deliberately
+  left alone (AGENTS.md: ask before restyling existing pages). A page's own styles
+  bundle after the layout's, so wherever the two overlap the page still wins. Folding
+  those two into this block is a later cleanup, not part of this change.
+-->
+<style is:global>
+:root{
+  --paper:#faf9f7; --ink:#14140f; --mute:#6b6a63; --rule:#e2e0da;
+  --dot:#d9d7d0; --blue:#2323e6; --green:#e8f3ea; --red:#fbeaea;
+  --col:128px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font:400 13.5px/1.65 "JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  background-image:
+    radial-gradient(var(--dot) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:16px 16px,var(--col) 100%;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:var(--blue)}
+.label{font-size:11px;font-weight:700;line-height:1.2;letter-spacing:1.2px;text-transform:uppercase;color:var(--mute);margin:0 0 24px}
+.micro{font-size:10.5px;font-weight:400;line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:var(--mute)}
+
+/* nav */
+nav{display:flex;align-items:center;gap:22px;padding:16px 0;border-bottom:1px dashed var(--rule);flex-wrap:wrap}
+.mark{width:26px;height:26px;border:2px solid var(--ink);border-radius:0;display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--ink);text-decoration:none}
+nav a.nl{color:var(--ink);text-decoration:none;font-size:12.5px}
+nav a.nl:hover{text-decoration:underline}
+nav .spacer{margin-left:auto}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;font-size:12px;font-weight:700;line-height:1;padding:11px 16px;text-decoration:none;border-radius:0;cursor:pointer;min-height:44px}
+.btn.p{background:var(--ink);color:var(--paper);border:0}
+.btn.s{background:var(--paper);color:var(--ink);border:1.5px solid var(--ink)}
+nav .btn{min-height:0;padding:8px 13px}
+
+/* footer */
+footer{padding:28px 0 56px;font-size:11.5px;color:var(--mute)}
+.social{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.social a{border:1px solid var(--ink);color:var(--ink);text-decoration:none;padding:7px 12px;font-size:11.5px}
+.social a:hover{background:var(--ink);color:var(--paper)}
+.fine{margin:0;font-size:11.5px;color:var(--mute)}
+
+@media (max-width:767px){
+  :root{--col:64px}
+  nav{gap:14px}
+}
+</style>
