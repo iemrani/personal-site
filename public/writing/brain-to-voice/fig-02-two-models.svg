@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1000 374" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="two-models-title two-models-desc">
+  <title id="two-models-title">Two models, not one</title>
+  <desc id="two-models-desc">A brain-to-voice system split into two separately trained models: a neural decoder that turns cortical signals into text, trained on the participant's own recorded attempts, and a voice model that turns that text into the participant's cloned voice, trained on audio recorded before they lost speech. Plain text is the handoff between them.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6b6a63"/></marker>
+    <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2323e6"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#faf9f7"/>
+  <g transform="translate(0,-94)">
+  <text class="fig-stamp" x="312" y="122" fill="rgba(20,20,15,0.40)" text-anchor="middle" letter-spacing="0.14em">MODEL A · DECODER</text>
+  <text class="fig-stamp" x="708" y="122" fill="rgba(20,20,15,0.40)" text-anchor="middle" letter-spacing="0.14em">MODEL B · VOICE</text>
+  <line x1="164" y1="168" x2="204" y2="168" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="420" y1="168" x2="468" y2="168" stroke="#2323e6" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+  <line x1="572" y1="168" x2="600" y2="168" stroke="#2323e6" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+  <line x1="816" y1="168" x2="868" y2="168" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 312,320 V 208" fill="none" stroke="#6b6a63" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <path d="M 708,320 V 208" fill="none" stroke="#6b6a63" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <rect x="468" y="208" width="104" height="12" fill="#faf9f7"/>
+  <text class="fig-meta" x="520" y="218" fill="#2323e6" text-anchor="middle" letter-spacing="0.06em">THE HANDOFF</text>
+  <rect x="320" y="248" width="90" height="12" fill="#faf9f7"/>
+  <text class="fig-meta" x="324" y="257" fill="#6b6a63" text-anchor="start" letter-spacing="0.06em">TRAINED ON</text>
+  <rect x="716" y="248" width="90" height="12" fill="#faf9f7"/>
+  <text class="fig-meta" x="720" y="257" fill="#6b6a63" text-anchor="start" letter-spacing="0.06em">TRAINED ON</text>
+  <rect x="16" y="136" width="148" height="64" fill="#faf9f7"/>
+  <rect x="16" y="136" width="148" height="64" fill="rgba(107,106,99,0.10)" stroke="#85847c" stroke-width="1"/>
+  <rect x="24" y="142" width="34" height="12" fill="transparent" stroke="rgba(133,132,124,0.40)" stroke-width="0.8"/>
+  <text class="fig-stamp" x="41" y="151" fill="rgba(133,132,124,0.90)" text-anchor="middle" letter-spacing="0.08em">IN</text>
+  <text class="fig-title-tight" x="90" y="174" fill="#14140f" text-anchor="middle">Cortical signal</text>
+  <text class="fig-label" x="90" y="190" fill="#6b6a63" text-anchor="middle">1024 electrodes</text>
+  <rect x="204" y="136" width="216" height="64" fill="#faf9f7"/>
+  <rect x="204" y="136" width="216" height="64" fill="#ffffff" stroke="#14140f" stroke-width="1"/>
+  <text class="fig-title-tight" x="312" y="168" fill="#14140f" text-anchor="middle">signal &#8594; phonemes &#8594; words</text>
+  <text class="fig-label" x="312" y="186" fill="#6b6a63" text-anchor="middle">one phoneme / 80 ms</text>
+  <rect x="468" y="136" width="104" height="64" fill="#faf9f7"/>
+  <rect x="468" y="136" width="104" height="64" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1.2"/>
+  <text class="fig-title" x="520" y="172" fill="#14140f" text-anchor="middle">plain text</text>
+  <text class="fig-label" x="520" y="188" fill="#2323e6" text-anchor="middle">"i love you"</text>
+  <rect x="600" y="136" width="216" height="64" fill="#faf9f7"/>
+  <rect x="600" y="136" width="216" height="64" fill="#ffffff" stroke="#14140f" stroke-width="1"/>
+  <text class="fig-title" x="708" y="168" fill="#14140f" text-anchor="middle">text &#8594; his voice</text>
+  <text class="fig-label" x="708" y="186" fill="#6b6a63" text-anchor="middle">cloned, not generic</text>
+  <rect x="868" y="136" width="100" height="64" fill="#faf9f7"/>
+  <rect x="868" y="136" width="100" height="64" fill="rgba(107,106,99,0.10)" stroke="#85847c" stroke-width="1"/>
+  <rect x="876" y="142" width="42" height="12" fill="transparent" stroke="rgba(133,132,124,0.40)" stroke-width="0.8"/>
+  <text class="fig-stamp" x="897" y="151" fill="rgba(133,132,124,0.90)" text-anchor="middle" letter-spacing="0.08em">OUT</text>
+  <text class="fig-title" x="918" y="180" fill="#14140f" text-anchor="middle">audible</text>
+  <rect x="204" y="320" width="216" height="64" fill="#faf9f7"/>
+  <rect x="204" y="320" width="216" height="64" fill="rgba(20,20,15,0.05)" stroke="#6b6a63" stroke-width="1"/>
+  <rect x="212" y="326" width="58" height="12" fill="transparent" stroke="rgba(107,106,99,0.40)" stroke-width="0.8"/>
+  <text class="fig-stamp" x="241" y="335" fill="rgba(107,106,99,0.90)" text-anchor="middle" letter-spacing="0.08em">DATA</text>
+  <text class="fig-title" x="312" y="358" fill="#14140f" text-anchor="middle">his brain, trying</text>
+  <text class="fig-label" x="312" y="374" fill="#6b6a63" text-anchor="middle">prompted sentences, hours</text>
+  <rect x="600" y="320" width="216" height="64" fill="#faf9f7"/>
+  <rect x="600" y="320" width="216" height="64" fill="rgba(20,20,15,0.05)" stroke="#6b6a63" stroke-width="1"/>
+  <rect x="608" y="326" width="58" height="12" fill="transparent" stroke="rgba(107,106,99,0.40)" stroke-width="0.8"/>
+  <text class="fig-stamp" x="637" y="335" fill="rgba(107,106,99,0.90)" text-anchor="middle" letter-spacing="0.08em">DATA</text>
+  <text class="fig-title" x="708" y="358" fill="#14140f" text-anchor="middle">his voice, before</text>
+  <text class="fig-label" x="708" y="374" fill="#6b6a63" text-anchor="middle">audio recorded while well</text>
+  <line x1="30" y1="432" x2="970" y2="432" stroke="rgba(20,20,15,0.10)" stroke-width="0.8"/>
+  <text class="fig-meta" x="30" y="448" fill="#6b6a63" letter-spacing="0.14em">LEGEND</text>
+  <rect x="128" y="440" width="10" height="10" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1"/>
+  <text class="fig-meta" x="146" y="449" fill="#6b6a63">the handoff between the two models</text>
+  <rect x="432" y="440" width="10" height="10" fill="rgba(20,20,15,0.05)" stroke="#6b6a63" stroke-width="1"/>
+  <text class="fig-meta" x="450" y="449" fill="#6b6a63">training data, separate per model</text>
+  <line x1="716" y1="445" x2="748" y2="445" stroke="#6b6a63" stroke-width="1" stroke-dasharray="4,3"/>
+  <text class="fig-meta" x="756" y="449" fill="#6b6a63">trains (offline, not at run time)</text>
+  </g>
+</svg>

@@ -110,16 +110,32 @@ const fmt = (d: Date) =>
 
 /* Figures. In the markdown the image and its caption sit on adjacent lines, so they
    render as ONE paragraph: <p><img><em>caption</em></p>. Style that paragraph as the
-   figure block. Do not reach for `p:has(img) + p`: there is no following paragraph. */
-.article p:has(> img){max-width:none;width:min(100%,900px);margin:0 0 32px}
-.article p:has(> img) img{
+   figure block. Do not reach for `p:has(img) + p`: there is no following paragraph.
+   An .svg image arrives here already inlined as <svg> (src/plugins/inline-svg.mjs). */
+.article p:has(> :is(img, svg)){max-width:none;width:min(100%,900px);margin:0 0 32px}
+.article p:has(> :is(img, svg)) > :is(img, svg){
   display:block;width:100%;height:auto;margin:0 0 10px;
   border:1px solid var(--rule);background:#fff;
 }
-.article p:has(> img) em{
+.article p:has(> :is(img, svg)) em{
   display:block;font-style:normal;font-size:11.5px;line-height:1.55;
   color:var(--mute);max-width:74ch;
 }
+
+/* Type inside inlined figures. Sizes are SVG user units on the 1000-unit canvas, so
+   they scale with the figure. Copied from ~/.claude/design/blueprint/fig.css (the
+   canonical scale; change it there first, then here). Floor is 9.5. */
+.article svg{
+  --fig-h1:17;--fig-title:15;--fig-title-tight:13.5;
+  --fig-label:11.5;--fig-meta:11;--fig-stamp:9.5;
+}
+.article svg text{font-family:"JetBrains Mono",ui-monospace,monospace}
+.article svg .fig-h1{font-size:calc(var(--fig-h1) * 1px)}
+.article svg .fig-title{font-size:calc(var(--fig-title) * 1px);font-weight:600}
+.article svg .fig-title-tight{font-size:calc(var(--fig-title-tight) * 1px);font-weight:600}
+.article svg .fig-label{font-size:calc(var(--fig-label) * 1px)}
+.article svg .fig-meta{font-size:calc(var(--fig-meta) * 1px)}
+.article svg .fig-stamp{font-size:calc(var(--fig-stamp) * 1px)}
 
 .endcap{padding:20px 0 8px;border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);margin-bottom:8px}
 .endcap{display:flex;padding:24px 0}
@@ -133,13 +149,13 @@ nav a.back{color:var(--mute)}
   .article p{font-size:13.5px}
   .article h2{margin:40px 0 16px}
 
-  /* Figures. The SVG inside each PNG is drawn on a 1000-unit canvas, so at phone
-     width the labels would land near 4px. Hold the image at 700px and let the
-     figure scroll sideways instead. The caption is in the same paragraph, so it
-     would inherit that 700px: pin it to the scrollport and cap it to the screen. */
-  .article p:has(> img){overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .article p:has(> img) img{min-width:700px}
-  .article p:has(> img) em{
+  /* Figures. Each is drawn on a 1000-unit canvas, so at phone width the labels
+     would land near 4px. Hold the figure at 700px and let it scroll sideways
+     instead. The caption is in the same paragraph, so it would inherit that
+     700px: pin it to the scrollport and cap it to the screen. */
+  .article p:has(> :is(img, svg)){overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .article p:has(> :is(img, svg)) > :is(img, svg){min-width:700px}
+  .article p:has(> :is(img, svg)) em{
     position:sticky;left:0;width:calc(100vw - 48px);max-width:74ch;
   }
 }

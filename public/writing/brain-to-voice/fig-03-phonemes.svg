@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="phonemes-title phonemes-desc">
+  <title id="phonemes-title">Sounds first, words later</title>
+  <desc id="phonemes-desc">The decoder does not predict words. It predicts one phoneme roughly every 80 milliseconds from about forty possible sounds, and a cascade of three language models then assembles that stream of sounds into the most likely English sentence. Predicting forty classes instead of 125,000 words is what makes the model trainable on half an hour of one person's data.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6b6a63"/></marker>
+    <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2323e6"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#faf9f7"/>
+  <g transform="translate(0,-84)">
+  <line x1="176" y1="144" x2="232" y2="144" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="464" y1="144" x2="520" y2="144" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="752" y1="144" x2="808" y2="144" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <path d="M 268,176 V 264" fill="none" stroke="#2323e6" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+  <rect x="282" y="206" width="76" height="14" fill="#faf9f7"/>
+  <text class="fig-meta" x="284" y="216" fill="#2323e6" text-anchor="start" letter-spacing="0.06em">IT EMITS</text>
+  <line x1="684" y1="292" x2="740" y2="292" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="463" y="116" width="58" height="14" fill="#faf9f7"/>
+  <text class="fig-meta" x="492" y="126" fill="#6b6a63" text-anchor="middle" letter-spacing="0.06em">SOUNDS</text>
+  <rect x="40" y="112" width="136" height="64" fill="#faf9f7"/>
+  <rect x="40" y="112" width="136" height="64" fill="rgba(107,106,99,0.10)" stroke="#85847c" stroke-width="1"/>
+  <text class="fig-title-tight" x="108" y="140" fill="#14140f" text-anchor="middle">Cortical signal</text>
+  <text class="fig-label" x="108" y="158" fill="#6b6a63" text-anchor="middle">continuous</text>
+  <rect x="232" y="112" width="232" height="64" fill="#faf9f7"/>
+  <rect x="232" y="112" width="232" height="64" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1.2"/>
+  <text class="fig-title-tight" x="348" y="138" fill="#14140f" text-anchor="middle">Pick 1 of about 40 sounds</text>
+  <text class="fig-label" x="348" y="156" fill="#2323e6" text-anchor="middle">every 80 ms</text>
+  <text class="fig-label" x="348" y="169" fill="#6b6a63" text-anchor="middle">40 classes, not 125,000</text>
+  <rect x="520" y="112" width="232" height="64" fill="#faf9f7"/>
+  <rect x="520" y="112" width="232" height="64" fill="#ffffff" stroke="#14140f" stroke-width="1"/>
+  <text class="fig-title" x="636" y="138" fill="#14140f" text-anchor="middle">Three language models</text>
+  <text class="fig-label" x="636" y="156" fill="#6b6a63" text-anchor="middle">sounds &#8594; words &#8594; the</text>
+  <text class="fig-label" x="636" y="169" fill="#6b6a63" text-anchor="middle">likeliest English sentence</text>
+  <rect x="808" y="112" width="152" height="64" fill="#faf9f7"/>
+  <rect x="808" y="112" width="152" height="64" fill="rgba(107,106,99,0.10)" stroke="#85847c" stroke-width="1"/>
+  <text class="fig-title" x="884" y="140" fill="#14140f" text-anchor="middle">Sentence</text>
+  <text class="fig-label" x="884" y="158" fill="#6b6a63" text-anchor="middle">as text</text>
+  <rect x="440" y="242" width="140" height="14" fill="#faf9f7"/>
+  <text class="fig-meta" x="440" y="252" fill="#6b6a63" text-anchor="start" letter-spacing="0.14em">ONE TICK = 80 MS</text>
+  <rect x="236" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="236" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="268" y="298" fill="#14140f" text-anchor="middle">AY</text>
+  <rect x="312" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="312" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="344" y="298" fill="#14140f" text-anchor="middle">L</text>
+  <rect x="388" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="388" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="420" y="298" fill="#14140f" text-anchor="middle">UH</text>
+  <rect x="464" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="464" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="496" y="298" fill="#14140f" text-anchor="middle">V</text>
+  <rect x="540" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="540" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="572" y="298" fill="#14140f" text-anchor="middle">Y</text>
+  <rect x="616" y="264" width="64" height="56" fill="#faf9f7"/>
+  <rect x="616" y="264" width="64" height="56" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="648" y="298" fill="#14140f" text-anchor="middle">OO</text>
+  <rect x="740" y="264" width="220" height="56" fill="#faf9f7"/>
+  <rect x="740" y="264" width="220" height="56" fill="rgba(20,20,15,0.05)" stroke="#6b6a63" stroke-width="1"/>
+  <text class="fig-title" x="850" y="290" fill="#14140f" text-anchor="middle">"I love you"</text>
+  <text class="fig-meta" x="850" y="308" fill="#6b6a63" text-anchor="middle">the language models decide this</text>
+  <line x1="30" y1="388" x2="970" y2="388" stroke="rgba(20,20,15,0.10)" stroke-width="0.8"/>
+  <text class="fig-meta" x="30" y="404" fill="#6b6a63" letter-spacing="0.14em">LEGEND</text>
+  <rect x="128" y="396" width="10" height="10" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1.2"/>
+  <text class="fig-meta" x="146" y="405" fill="#6b6a63">the design choice that makes the model trainable</text>
+  <rect x="532" y="396" width="10" height="10" fill="#ffffff" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-meta" x="550" y="405" fill="#6b6a63">one decoded sound, one 80 ms tick</text>
+  </g>
+</svg>

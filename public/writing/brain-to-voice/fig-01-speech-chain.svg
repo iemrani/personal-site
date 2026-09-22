@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="speech-chain-title speech-chain-desc">
+  <title id="speech-chain-title">Where the implant listens</title>
+  <desc id="speech-chain-desc">The speech chain runs from intention to motor commands in the speech motor cortex, then to nerves and muscles, then to sound. ALS breaks the link between the cortex and the muscles, so no sound arrives. The implant taps the chain at the motor-command stage, downstream of intention, which is why it recovers speech a person is trying to produce rather than reading their thoughts.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6b6a63"/></marker>
+    <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2323e6"/></marker>
+    <marker id="arrow-faint" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="rgba(20,20,15,0.25)"/></marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#faf9f7"/>
+  <g transform="translate(0,-44)">
+  <rect x="415" y="72" width="158" height="14" fill="#faf9f7"/>
+  <text class="fig-meta" x="494" y="82" fill="#6b6a63" text-anchor="middle" letter-spacing="0.14em">ALS BREAKS IT HERE</text>
+  <line x1="176" y1="144" x2="236" y2="144" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="448" y1="144" x2="482" y2="144" stroke="#6b6a63" stroke-width="1"/>
+  <line x1="486" y1="132" x2="496" y2="156" stroke="#14140f" stroke-width="1.2"/>
+  <line x1="496" y1="132" x2="506" y2="156" stroke="#14140f" stroke-width="1.2"/>
+  <line x1="510" y1="144" x2="532" y2="144" stroke="rgba(20,20,15,0.25)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-faint)"/>
+  <line x1="704" y1="144" x2="780" y2="144" stroke="rgba(20,20,15,0.25)" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrow-faint)"/>
+  <path d="M 344,176 V 276" fill="none" stroke="#2323e6" stroke-width="1.2" marker-end="url(#arrow-accent)"/>
+  <rect x="358" y="214" width="96" height="14" fill="#faf9f7"/>
+  <text class="fig-meta" x="360" y="224" fill="#2323e6" text-anchor="start" letter-spacing="0.06em">THE TAP</text>
+  <line x1="552" y1="308" x2="612" y2="308" stroke="#6b6a63" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="40" y="112" width="136" height="64" fill="#faf9f7"/>
+  <rect x="40" y="112" width="136" height="64" fill="rgba(20,20,15,0.03)" stroke="rgba(20,20,15,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text class="fig-title" x="108" y="140" fill="#14140f" text-anchor="middle">Intention</text>
+  <text class="fig-label" x="108" y="156" fill="#6b6a63" text-anchor="middle">what he means</text>
+  <text class="fig-label" x="108" y="169" fill="#85847c" text-anchor="middle">not recorded</text>
+  <rect x="236" y="112" width="212" height="64" fill="#faf9f7"/>
+  <rect x="236" y="112" width="212" height="64" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1.2"/>
+  <text class="fig-title" x="342" y="140" fill="#14140f" text-anchor="middle">Speech motor cortex</text>
+  <text class="fig-label" x="342" y="156" fill="#6b6a63" text-anchor="middle">commands for mouth,</text>
+  <text class="fig-label" x="342" y="169" fill="#6b6a63" text-anchor="middle">tongue, jaw, larynx</text>
+  <rect x="536" y="112" width="168" height="64" fill="#faf9f7"/>
+  <rect x="536" y="112" width="168" height="64" fill="rgba(20,20,15,0.03)" stroke="rgba(20,20,15,0.30)" stroke-width="1"/>
+  <text class="fig-title" x="620" y="140" fill="#14140f" text-anchor="middle">Nerves, muscles</text>
+  <text class="fig-label" x="620" y="158" fill="#85847c" text-anchor="middle">no longer obey</text>
+  <rect x="784" y="112" width="152" height="64" fill="#faf9f7"/>
+  <rect x="784" y="112" width="152" height="64" fill="rgba(20,20,15,0.02)" stroke="rgba(20,20,15,0.20)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text class="fig-title" x="860" y="140" fill="#6b6a63" text-anchor="middle">Sound</text>
+  <text class="fig-label" x="860" y="158" fill="#85847c" text-anchor="middle">never arrives</text>
+  <rect x="236" y="276" width="316" height="64" fill="#faf9f7"/>
+  <rect x="236" y="276" width="316" height="64" fill="#ffffff" stroke="#14140f" stroke-width="1"/>
+  <rect x="244" y="282" width="66" height="12" fill="transparent" stroke="rgba(20,20,15,0.40)" stroke-width="0.8"/>
+  <text class="fig-stamp" x="277" y="291" fill="rgba(20,20,15,0.80)" text-anchor="middle" letter-spacing="0.08em">IMPLANT</text>
+  <text class="fig-title" x="394" y="312" fill="#14140f" text-anchor="middle">Electrode threads in cortex</text>
+  <text class="fig-label" x="394" y="330" fill="#6b6a63" text-anchor="middle">Neuralink N1: 1024 electrodes on 64 threads</text>
+  <rect x="612" y="276" width="324" height="64" fill="#faf9f7"/>
+  <rect x="612" y="276" width="324" height="64" fill="rgba(20,20,15,0.05)" stroke="#6b6a63" stroke-width="1"/>
+  <text class="fig-title" x="774" y="312" fill="#14140f" text-anchor="middle">Decoder, then voice</text>
+  <text class="fig-label" x="774" y="330" fill="#6b6a63" text-anchor="middle">continues in the next figure</text>
+  <line x1="30" y1="408" x2="970" y2="408" stroke="rgba(20,20,15,0.10)" stroke-width="0.8"/>
+  <text class="fig-meta" x="30" y="424" fill="#6b6a63" letter-spacing="0.14em">LEGEND</text>
+  <rect x="128" y="416" width="10" height="10" fill="rgba(35,35,230,0.08)" stroke="#2323e6" stroke-width="1.2"/>
+  <text class="fig-meta" x="146" y="425" fill="#6b6a63">where the electrodes sit, and what they record</text>
+  <rect x="512" y="416" width="10" height="10" fill="rgba(20,20,15,0.03)" stroke="rgba(20,20,15,0.30)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text class="fig-meta" x="530" y="425" fill="#6b6a63">present in the person, not available to the system</text>
+  </g>
+</svg>
